@@ -178,29 +178,6 @@ public class CourseService extends Service {
             }
             course_teacher = course_teacher.replace("[\"", "").replace("\"]", "").replace("\",\"", ",");
 
-            String courser_time = "";
-
-            switch (course.getCourse_time()) {
-                case 17:
-                    courser_time = "星期一第七节";
-                    break;
-                case 27:
-                    courser_time = "星期二第七节";
-                    break;
-                case 28:
-                    courser_time = "星期二第八节";
-                    break;
-                case 47:
-                    courser_time = "星期四第七节";
-                    break;
-                case 48:
-                    courser_time = "星期四第八节";
-                    break;
-                case 56:
-                    courser_time = "星期五第六节";
-                    break;
-            }
-
             row = sheet.createRow(i + 1);
             cell = row.createCell(0);
             cell.setCellValue(course_clazz);
@@ -212,7 +189,7 @@ public class CourseService extends Service {
             cell.setCellValue(course.getCourse_name());
             cell.setCellStyle(style);
             cell = row.createCell(3);
-            cell.setCellValue(courser_time);
+            cell.setCellValue(getCourse_time(course.getCourse_time()));
             cell.setCellStyle(style);
             cell = row.createCell(4);
             cell.setCellValue(course.getCourse_apply_limit());
@@ -489,6 +466,32 @@ public class CourseService extends Service {
         }
     }
 
+    private String getCourse_time(int time) {
+        String course_time = "";
+        switch (time) {
+            case 17:
+                course_time = "星期一第七节";
+                break;
+            case 27:
+                course_time = "星期二第七节";
+                break;
+            case 28:
+                course_time = "星期二第八节";
+                break;
+            case 47:
+                course_time = "星期四第七节";
+                break;
+            case 48:
+                course_time = "星期四第八节";
+                break;
+            case 56:
+                course_time = "星期五第六节";
+                break;
+        }
+
+        return course_time;
+    }
+
     public ExcelRender applyExport() {
         List<CourseApply> courseApplyListOrderByCourse_id = courseApplyService.listOrderByCourse_idAndCourse_timeAndStudent_number();
         List<CourseApply> courseApplyListOrderByGrade_idAndStudent_id = courseApplyService.listOrderByClazz_nameAndStudent_idAndCourse_time();
@@ -526,28 +529,6 @@ public class CourseService extends Service {
         for (int i = 0; i < courseList.size(); i++) {
             Course course = courseList.get(i);
 
-            String course_time = "";
-            switch (course.getCourse_time()) {
-                case 17:
-                    course_time = "星期一第七节";
-                    break;
-                case 27:
-                    course_time = "星期二第七节";
-                    break;
-                case 28:
-                    course_time = "星期二第八节";
-                    break;
-                case 47:
-                    course_time = "星期四第七节";
-                    break;
-                case 48:
-                    course_time = "星期四第八节";
-                    break;
-                case 56:
-                    course_time = "星期五第六节";
-                    break;
-            }
-
             int count = courseApplyService.countByCourse_id(course.getCourse_id());
 
             row = sheet.createRow(i + 1);
@@ -555,7 +536,7 @@ public class CourseService extends Service {
             cell.setCellValue(course.getCourse_name());
             cell.setCellStyle(style);
             cell = row.createCell(1);
-            cell.setCellValue(course_time);
+            cell.setCellValue(getCourse_time(course.getCourse_time()));
             cell.setCellStyle(style);
             cell = row.createCell(2);
             cell.setCellValue(course.getCourse_teacher());
@@ -602,28 +583,6 @@ public class CourseService extends Service {
         for(int i = 0; i < courseApplyListOrderByCourse_id.size(); i++) {
             CourseApply courseApply = courseApplyListOrderByCourse_id.get(i);
 
-            String course_time = "";
-            switch (courseApply.getInt("course_time")) {
-                case 17:
-                    course_time = "星期一第七节";
-                    break;
-                case 27:
-                    course_time = "星期二第七节";
-                    break;
-                case 28:
-                    course_time = "星期二第八节";
-                    break;
-                case 47:
-                    course_time = "星期四第七节";
-                    break;
-                case 48:
-                    course_time = "星期四第八节";
-                    break;
-                case 56:
-                    course_time = "星期五第六节";
-                    break;
-            }
-
             row = sheet.createRow(i + 1);
             cell = row.createCell(0);
             cell.setCellValue(courseApply.getStr(Student.STUDENT_NAME));
@@ -641,7 +600,7 @@ public class CourseService extends Service {
             cell.setCellValue(courseApply.getStr(Course.COURSE_NAME));
             cell.setCellStyle(style);
             cell = row.createCell(5);
-            cell.setCellValue(course_time);
+            cell.setCellValue(getCourse_time(courseApply.getInt("course_time")));
             cell.setCellStyle(style);
             cell = row.createCell(6);
             cell.setCellValue(courseApply.getStr(Course.COURSE_TEACHER));
@@ -684,28 +643,6 @@ public class CourseService extends Service {
 
             String teacher_name = courseApply.getStr(Course.COURSE_TEACHER);
 
-            String course_time = "";
-            switch (courseApply.getInt("course_time")) {
-                case 17:
-                    course_time = "星期一第七节";
-                    break;
-                case 27:
-                    course_time = "星期二第七节";
-                    break;
-                case 28:
-                    course_time = "星期二第八节";
-                    break;
-                case 47:
-                    course_time = "星期四第七节";
-                    break;
-                case 48:
-                    course_time = "星期四第八节";
-                    break;
-                case 56:
-                    course_time = "星期五第六节";
-                    break;
-            }
-
             row = sheet.createRow(i + 1);
             cell = row.createCell(0);
             cell.setCellValue(courseApply.getStr(Student.STUDENT_NAME));
@@ -723,7 +660,7 @@ public class CourseService extends Service {
             cell.setCellValue(courseApply.getStr(Course.COURSE_NAME));
             cell.setCellStyle(style);
             cell = row.createCell(5);
-            cell.setCellValue(course_time);
+            cell.setCellValue(getCourse_time(courseApply.getInt("course_time")));
             cell.setCellStyle(style);
             cell = row.createCell(6);
             cell.setCellValue(teacher_name);
@@ -774,28 +711,6 @@ public class CourseService extends Service {
 
             String teacher_name = courseApply.getStr(Course.COURSE_TEACHER);
 
-            String course_time = "";
-            switch (courseApply.getInt("course_time")) {
-                case 17:
-                    course_time = "星期一第七节";
-                    break;
-                case 27:
-                    course_time = "星期二第七节";
-                    break;
-                case 28:
-                    course_time = "星期二第八节";
-                    break;
-                case 47:
-                    course_time = "星期四第七节";
-                    break;
-                case 48:
-                    course_time = "星期四第八节";
-                    break;
-                case 56:
-                    course_time = "星期五第六节";
-                    break;
-            }
-
             row = sheet.createRow(index + 1);
             cell = row.createCell(0);
             cell.setCellValue(courseApply.getStr(Student.STUDENT_NAME));
@@ -813,7 +728,7 @@ public class CourseService extends Service {
             cell.setCellValue(courseApply.getStr(Course.COURSE_NAME));
             cell.setCellStyle(style);
             cell = row.createCell(5);
-            cell.setCellValue(course_time);
+            cell.setCellValue(getCourse_time(courseApply.getInt("course_time")));
             cell.setCellStyle(style);
             cell = row.createCell(6);
             cell.setCellValue(teacher_name);
