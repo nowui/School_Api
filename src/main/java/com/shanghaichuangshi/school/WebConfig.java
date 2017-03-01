@@ -76,7 +76,7 @@ public class WebConfig extends JFinalConfig {
         druidPlugin.addFilter(sql_log_filter);
 
         ActiveRecordPlugin activeRecordPlugin = new ActiveRecordPlugin(druidPlugin);
-        activeRecordPlugin.setBaseSqlTemplatePath(PathKit.getRootClassPath() + "/sql/");
+        activeRecordPlugin.setBaseSqlTemplatePath(PathKit.getWebRootPath() + "/WEB-INF/sql/");
         activeRecordPlugin.addSqlTemplate("Code.sql");
 
         activeRecordPlugin.addMapping("table_admin", "admin_id", Admin.class);

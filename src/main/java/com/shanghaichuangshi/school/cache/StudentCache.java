@@ -1,5 +1,6 @@
 package com.shanghaichuangshi.school.cache;
 
+import com.shanghaichuangshi.cache.Cache;
 import com.shanghaichuangshi.school.model.Student;
 
 public class StudentCache extends Cache {
